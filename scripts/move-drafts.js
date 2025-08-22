@@ -1,5 +1,6 @@
 const fs = require("fs")
 const path = require("path")
+const readline = require("readline")
 
 // 설정
 const DRAFTS_DIR = "drafts"
@@ -196,8 +197,22 @@ function processDraft(draft, preview = false) {
   }
 }
 
+function askQuestion(question) {
+  return new Promise(resolve => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    })
+
+    rl.question(question, answer => {
+      rl.close()
+      resolve(answer)
+    })
+  })
+}
+
 // 메인 실행 함수
-function main() {
+async function main() {
   const args = process.argv.slice(2)
   const preview = args.includes("--preview")
   const specificDraft = args.find(arg => !arg.startsWith("--"))
@@ -238,8 +253,9 @@ function main() {
   if (preview) {
     log(`👀 Preview mode - no files will be moved`, "yellow")
   } else {
-    const response = require("readline-sync").question(
-      `Do you want to move all ${drafts.length} drafts? (y/N): `
+    // 내장 readline 모듈 사용
+    const response = await askQuestion(
+      `Do you want to move all ${drafts.length} drafts? (y/n): `
     )
 
     if (response.toLowerCase() !== "y") {
@@ -262,7 +278,10 @@ function main() {
 
 // 스크립트가 직접 실행될 때만 main 함수 호출
 if (require.main === module) {
-  main()
+  main().catch(error => {
+    console.error("Script failed:", error)
+    process.exit(1)
+  })
 }
 
 module.exports = {
