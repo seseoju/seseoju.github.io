@@ -1,5 +1,8 @@
 - [x] Change font
+- [x] How to store drafts
+- [x] Add script generating new post template
+- [x] Add script moving drafts post to content
+- [ ] Preview drafts on develop environment only
 - [ ] Customize Code Block
 - [ ] Add dark mode
-- [ ] How to store drafts
 - [ ] Support internalization
