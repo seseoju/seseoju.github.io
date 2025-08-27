@@ -4,10 +4,9 @@
  * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
  */
 
-/**
- * @type {import('gatsby').GatsbyConfig}
- */
-module.exports = {
+import type { GatsbyConfig } from "gatsby"
+
+const config: GatsbyConfig = {
   siteMetadata: {
     title: `seseoju's blog`,
     author: {
@@ -76,8 +75,8 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.map(node => {
+            serialize: ({ query: { site, allMarkdownRemark } }: any) => {
+              return allMarkdownRemark.nodes.map((node: any) => {
                 return Object.assign({}, node.frontmatter, {
                   description: node.excerpt,
                   date: node.frontmatter.date,
@@ -124,3 +123,5 @@ module.exports = {
     },
   ],
 }
+
+export default config

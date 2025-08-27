@@ -9,8 +9,22 @@ import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
-const Bio = () => {
-  const data = useStaticQuery(graphql`
+interface BioQuery {
+  site: {
+    siteMetadata: {
+      author: {
+        name: string
+        summary: string
+      }
+      social: {
+        github: string
+      }
+    }
+  }
+}
+
+const Bio: React.FC = () => {
+  const data = useStaticQuery<BioQuery>(graphql`
     query BioQuery {
       site {
         siteMetadata {
@@ -49,6 +63,7 @@ const Bio = () => {
           <a
             target="_blank"
             href={`https://github.com/${social?.github || ``}`}
+            rel="noopener noreferrer"
           >
             GitHub
           </a>
