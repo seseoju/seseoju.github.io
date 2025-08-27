@@ -6,6 +6,8 @@
 
 import type { GatsbyConfig } from "gatsby"
 
+const isDev = process.env.NODE_ENV === "development"
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `seseoju's blog`,
@@ -36,6 +38,17 @@ const config: GatsbyConfig = {
         path: `${__dirname}/src/images`,
       },
     },
+    ...(isDev
+      ? [
+          {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+              path: `${__dirname}/drafts`,
+              name: `drafts`,
+            },
+          },
+        ]
+      : []),
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -44,12 +57,19 @@ const config: GatsbyConfig = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 630,
+              showCaptions: true,
             },
           },
           {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
               wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          {
+            resolve: "gatsby-remark-code-titles",
+            options: {
+              className: "gatsby-remark-code-title",
             },
           },
           `gatsby-remark-prismjs`,

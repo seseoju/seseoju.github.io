@@ -2,7 +2,7 @@
 - [x] How to store drafts
 - [x] Add script generating new post template
 - [x] Add script moving drafts post to content
-- [ ] Preview drafts on develop environment only
+- [x] Preview drafts only in development environment
 - [x] Customize Code Block
 - [ ] Add dark mode
 - [ ] Support internalization
