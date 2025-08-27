@@ -64,6 +64,7 @@ const Bio: React.FC = () => {
             target="_blank"
             href={`https://github.com/${social?.github || ``}`}
             rel="noopener noreferrer"
+            className="bio-anchor"
           >
             GitHub
           </a>
