@@ -4,5 +4,5 @@
 - [x] Add script moving drafts post to content
 - [x] Preview drafts only in development environment
 - [x] Customize Code Block
-- [ ] Add dark mode
+- [x] Add dark mode
 - [ ] Support internalization
